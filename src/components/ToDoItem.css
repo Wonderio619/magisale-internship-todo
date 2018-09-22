@@ -27,7 +27,27 @@
     margin-right: 5px;
 }
 
+.ToDoItem-Edit {
+    width: 35px;
+    /*padding: 5px;*/
+    height: 35px;
+    cursor: pointer;
+    background: #8d811698;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
 .ToDoItem-Delete:hover {
+    box-shadow: none;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+
+.ToDoItem-Edit:hover {
     box-shadow: none;
     margin-top: 1px;
     margin-left: 1px;

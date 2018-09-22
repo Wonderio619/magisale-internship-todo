@@ -9,24 +9,33 @@ class ToDo extends Component {
         this.state = {
             list: [
                 {
-                    'todo': "Wash and take away the Kurzhiy's cup from WC"
+					title: 'Cup cleaning',
+                    todo: "Wash and take away the Kurzhiy's cup from WC"
                 },
                 {
-                    'todo': 'Do some rollton and cigarettes'
-                }
+					title: 'Smoking rollton',
+                    todo: 'Do some rollton and cigarettes'
+                },
+				{
+					title: 'Curious dream',
+					todo: 'Build a time machine'
+				}
             ],
+			title: '',
             todo: ''
         };
     };
-
+    
     createNewToDoItem = () => {
-      this.setState(({ list, todo }) => ({
+      this.setState(({ list, title, todo }) => ({
         list: [
             ...list,
           {
+            title,  
             todo
           }
         ],
+        title: '',
         todo: ''
       }));
     };
@@ -36,18 +45,25 @@ class ToDo extends Component {
           if (e.key === 'Enter') {
             this.createNewToDoItem();
           }
+        
         }
     };
 
-    handleInput = e => {
+    handleTitleInput = e => {
       this.setState({
-        todo: e.target.value
+        title: e.target.value,
+      });
+    };
+
+    handleTodoInput = e => {
+        this.setState({
+         todo: e.target.value
       });
     };
 
     deleteItem = indexToDelete => {
-      this.setState(({ list }) => ({
-        list: list.filter((toDo, index) => index !== indexToDelete)
+        this.setState(({ list }) => ({
+          list: list.filter((toDo, index) => index !== indexToDelete)
       }));
     };
 
@@ -63,7 +79,8 @@ class ToDo extends Component {
                         {this.state.list.map((item, key) => {
                                 return <ToDoItem
                                                 key={key}
-                                                item={item.todo}
+                                                title={item.title}
+                                                todo={item.todo}
                                                 deleteItem={this.deleteItem.bind(this, key)}
                                                 />
                           }
@@ -71,7 +88,8 @@ class ToDo extends Component {
                     </div>
 
                     <div>
-                       <input type="text" value={this.state.todo} onChange={this.handleInput} onKeyPress={this.handleKeyPress}/>
+                       <input type="text" placeholder="Enter new title" value={this.state.title} onChange={this.handleTitleInput} onKeyPress={this.handleKeyPress}/>
+                       <input type="text" placeholder="Enter new todo" value={this.state.todo} onChange={this.handleTodoInput} onKeyPress={this.handleKeyPress}/>
                        <button className="ToDo-Add" onClick={this.createNewToDoItem}>+</button>
                     </div>
 
