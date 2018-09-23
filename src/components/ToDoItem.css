@@ -13,21 +13,7 @@
     margin-right: 10px;
 }
 
-.ToDoItem-Delete {
-    width: 35px;
-    /*padding: 5px;*/
-    height: 35px;
-    cursor: pointer;
-    background: #ff7373;
-    border-radius: 10px;
-    border: 1px solid #ffffff;
-    box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 18px;
-    margin-right: 5px;
-}
-
-.ToDoItem-Edit {
+.ToDoItem-Button {
     width: 35px;
     /*padding: 5px;*/
     height: 35px;
@@ -41,13 +27,15 @@
     margin-right: 5px;
 }
 
-.ToDoItem-Delete:hover {
-    box-shadow: none;
-    margin-top: 1px;
-    margin-left: 1px;
+.ToDoItem-Button#delbtn {
+    background: #be1010f6;
 }
 
-.ToDoItem-Edit:hover {
+.ToDoItem-Button#savebtn {
+    background: #5f9be0f6;
+}
+
+.ToDoItem-Button:hover {
     box-shadow: none;
     margin-top: 1px;
     margin-left: 1px;

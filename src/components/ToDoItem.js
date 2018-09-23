@@ -27,8 +27,8 @@ class ToDoItem extends Component {
             <div className="ToDoItem">
             <p className="ToDoItem-Text">{this.props.title}</p>
             <p className="ToDoItem-Text">{this.props.todo}</p>
-            <button className="ToDoItem-Edit" onClick={this.edit}>&#x270D;</button>
-            <button className="ToDoItem-Delete" onClick={this.props.deleteItem}>-</button>
+            <button className="ToDoItem-Button" id="editbtn" onClick={this.edit}>&#x270D;</button>
+            <button className="ToDoItem-Button" id="delbtn" onClick={this.props.deleteItem}>&minus;</button>
         </div>
         );
       };
@@ -38,7 +38,7 @@ class ToDoItem extends Component {
           <div className="ToDoItem">
             <textarea ref="newTitle" defaultValue={this.props.title}></textarea>
             <textarea ref="newToDo" defaultValue={this.props.todo}></textarea>
-            <button onClick={this.save} className="ToDoItem-Save">&#128190;</button>
+            <button onClick={this.save} className="ToDoItem-Button" id="savebtn">&#128190;</button>
           </div>
         );
       };

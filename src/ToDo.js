@@ -100,7 +100,6 @@ class ToDo extends Component {
                        <input type="text" placeholder="Enter new todo" value={this.state.todo} onChange={this.handleTodoInput} onKeyPress={this.handleKeyPress}/>
                        <button className="ToDo-Add" onClick={this.createNewToDoItem}>+</button>
                     </div>
-
                 </div>
             </div>
         );
