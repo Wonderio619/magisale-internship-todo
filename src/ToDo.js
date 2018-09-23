@@ -67,6 +67,23 @@ class ToDo extends Component {
       }));
     };
 
+    editItem = (i, updTitle, updToDo) => {
+        let arr = this.state.list;
+        arr[i].title = updTitle;
+        arr[i].todo = updToDo;
+        this.setState ({list: arr});
+    };
+
+    eachToDo = (item, i) => {
+        return <ToDoItem
+                    key={i}
+                    title={item.title}
+                    todo={item.todo}
+                    deleteItem={this.deleteItem.bind(this, i)}
+                    editItem={this.editItem.bind(this, i)}
+                />
+      };
+
     render() {
         return (
             <div className="ToDo">
@@ -75,16 +92,7 @@ class ToDo extends Component {
                 <div className="ToDo-Container">
 
                     <div className="ToDo-Content">
-
-                        {this.state.list.map((item, key) => {
-                                return <ToDoItem
-                                                key={key}
-                                                title={item.title}
-                                                todo={item.todo}
-                                                deleteItem={this.deleteItem.bind(this, key)}
-                                                />
-                          }
-                        )}
+                        {this.state.list.map(this.eachToDo)}
                     </div>
 
                     <div>
