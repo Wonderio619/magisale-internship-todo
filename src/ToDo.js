@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './ToDo.css';
 import ToDoItem from './components/ToDoItem';
+import AppBar from './components/AppBar';
+import AddButton from './components/AddButton';
 import Logo from './assets/logo.png';
 
 class ToDo extends Component {
@@ -88,7 +90,7 @@ class ToDo extends Component {
         return (
             <div className="ToDo">
                 <img className="Logo" src={Logo} alt="React logo"/>
-                <h1 className="ToDo-Header">MAGISOFT REACT INTERNSHIP TODO</h1>
+                <h1 className="ToDo-Header"><AppBar /></h1>
                 <div className="ToDo-Container">
 
                     <div className="ToDo-Content">
@@ -98,7 +100,7 @@ class ToDo extends Component {
                     <div>
                        <input type="text" placeholder="Enter new title" value={this.state.title} onChange={this.handleTitleInput} onKeyPress={this.handleKeyPress}/>
                        <input type="text" placeholder="Enter new todo" value={this.state.todo} onChange={this.handleTodoInput} onKeyPress={this.handleKeyPress}/>
-                       <button className="ToDo-Add" onClick={this.createNewToDoItem}>+</button>
+                       <AddButton addHandler={this.createNewToDoItem} />
                     </div>
                 </div>
             </div>
