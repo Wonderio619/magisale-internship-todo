@@ -24,7 +24,7 @@ class ToDo extends Component {
 				}
             ],
 			title: '',
-            todo: ''
+            todo: '',
         };
     };
     
@@ -98,8 +98,18 @@ class ToDo extends Component {
                     </div>
 
                     <div>
-                       <input type="text" placeholder="Enter new title" value={this.state.title} onChange={this.handleTitleInput} onKeyPress={this.handleKeyPress}/>
-                       <input type="text" placeholder="Enter new todo" value={this.state.todo} onChange={this.handleTodoInput} onKeyPress={this.handleKeyPress}/>
+                       <input 
+                            type="text"
+                            placeholder="Enter new title"
+                            value={this.state.title}
+                            onChange={this.handleTitleInput}
+                            onKeyPress={this.handleKeyPress}/>
+                       <input
+                            type="text"
+                            placeholder="Enter new todo" 
+                            value={this.state.todo} 
+                            onChange={this.handleTodoInput} 
+                            onKeyPress={this.handleKeyPress}/> 
                        <AddButton addHandler={this.createNewToDoItem} />
                     </div>
                 </div>
