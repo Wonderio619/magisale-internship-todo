@@ -6,37 +6,10 @@
 
 .ToDoItem-Text {
     width: 90%;
-    background-color: white;
+    background-color: rgb(206, 207, 195);
     border: 1px solid lightgrey;
+    border-radius: 10px;
     box-shadow: 1px 1px 1px lightgrey;
     padding: 12px;
     margin-right: 10px;
-}
-
-.ToDoItem-Button {
-    width: 35px;
-    /*padding: 5px;*/
-    height: 35px;
-    cursor: pointer;
-    background: #8d811698;
-    border-radius: 10px;
-    border: 1px solid #ffffff;
-    box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 18px;
-    margin-right: 5px;
-}
-
-.ToDoItem-Button#delbtn {
-    background: #be1010f6;
-}
-
-.ToDoItem-Button#savebtn {
-    background: #5f9be0f6;
-}
-
-.ToDoItem-Button:hover {
-    box-shadow: none;
-    margin-top: 1px;
-    margin-left: 1px;
 }

@@ -3,6 +3,7 @@ import './ToDo.css';
 import ToDoItem from './components/ToDoItem';
 import AppBar from './components/AppBar';
 import AddButton from './components/AddButton';
+import AddToDoFields from './components/AddToDoFields'
 import Logo from './assets/logo.png';
 
 class ToDo extends Component {
@@ -47,7 +48,6 @@ class ToDo extends Component {
           if (e.key === 'Enter') {
             this.createNewToDoItem();
           }
-        
         }
     };
 
@@ -90,7 +90,7 @@ class ToDo extends Component {
         return (
             <div className="ToDo">
                 <img className="Logo" src={Logo} alt="React logo"/>
-                <h1 className="ToDo-Header"><AppBar /></h1>
+                <AppBar />
                 <div className="ToDo-Container">
 
                     <div className="ToDo-Content">
@@ -98,18 +98,12 @@ class ToDo extends Component {
                     </div>
 
                     <div>
-                       <input 
-                            type="text"
-                            placeholder="Enter new title"
-                            value={this.state.title}
-                            onChange={this.handleTitleInput}
-                            onKeyPress={this.handleKeyPress}/>
-                       <input
-                            type="text"
-                            placeholder="Enter new todo" 
-                            value={this.state.todo} 
-                            onChange={this.handleTodoInput} 
-                            onKeyPress={this.handleKeyPress}/> 
+                        <AddToDoFields
+                            toDoValue={this.state.todo}
+                            titleValue={this.state.title}
+                            titleOnChange={this.handleTitleInput}
+                            toDoOnChange={this.handleTodoInput}
+                        />
                        <AddButton addHandler={this.createNewToDoItem} />
                     </div>
                 </div>

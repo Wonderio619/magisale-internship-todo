@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './ToDoItem.css';
 import EditButton from './EditButton';
 import DeleteButton from './DeleteButton';
-import SaveButton from './SaveButton';
+import EditToDoFields from './EditToDoFields';
 
 class ToDoItem extends Component {
     constructor(props) {
@@ -15,10 +15,10 @@ class ToDoItem extends Component {
       edit = () => {
         this.setState ({editMode: true});
       };
-      
-      save = () => {
-        let updTitle = this.refs.newTitle.value;
-        let updToDo = this.refs.newToDo.value;
+
+      save = (titleInput, toDoInput) => {
+        let updTitle = titleInput
+        let updToDo = toDoInput
         this.props.editItem (updTitle, updToDo);
         
         this.setState ({
@@ -32,8 +32,6 @@ class ToDoItem extends Component {
             <p className="ToDoItem-Text">{this.props.todo}</p>
             <EditButton editHandler={this.edit} />
             <DeleteButton deleteHandler={this.props.deleteItem} />
-            {/* <button className="ToDoItem-Button" id="editbtn" onClick={this.edit}>&#x270D;</button> */}
-            {/* <button className="ToDoItem-Button" id="delbtn" onClick={this.props.deleteItem}>&minus;</button> */}
         </div>
         );
       };
@@ -41,10 +39,11 @@ class ToDoItem extends Component {
       renderEdit = () => {
         return (
           <div className="ToDoItem">
-            <textarea ref="newTitle" defaultValue={this.props.title}></textarea>
-            <textarea ref="newToDo" defaultValue={this.props.todo}></textarea>
-            <SaveButton saveHandler={this.save} />
-            {/* <button onClick={this.save} className="ToDoItem-Button" id="savebtn">&#128190;</button> */}
+            <EditToDoFields 
+                defaultTitleValue={this.props.title}
+                defaultToDoValue={this.props.todo}
+                onSave={this.save}
+            />
           </div>
         );
       };
@@ -55,7 +54,7 @@ class ToDoItem extends Component {
         } else {
           return this.renderNormal ();
         }
-      }
+    }
 }
 
 export default ToDoItem;
