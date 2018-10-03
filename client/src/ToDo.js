@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import './ToDo.css';
+import Logo from './assets/logo.png';
 import ToDoItem from './components/ToDoItem';
 import AppBar from './components/AppBar';
-import AddButton from './components/AddButton';
-import AddToDoFields from './components/AddToDoFields'
-import Logo from './assets/logo.png';
+import Popover from './components/Popover';
 
 class ToDo extends Component {
     constructor(props) {
@@ -30,24 +29,18 @@ class ToDo extends Component {
     };
     
     createNewToDoItem = () => {
-      this.setState(({ list, title, todo }) => ({
-        list: [
-            ...list,
-          {
-            title,  
-            todo
-          }
-        ],
-        title: '',
-        todo: ''
-      }));
-    };
-
-    handleKeyPress = e => {
-        if (e.target.value !== '') {
-          if (e.key === 'Enter') {
-            this.createNewToDoItem();
-          }
+        if (this.state.title !== '' & this.state.todo !== '') {
+            this.setState(({ list, title, todo }) => ({
+                list: [
+                    ...list,
+                    {
+                        title,
+                        todo
+                    }
+                ],
+                title: '',
+                todo: ''
+            }));
         }
     };
 
@@ -98,13 +91,20 @@ class ToDo extends Component {
                     </div>
 
                     <div>
-                        <AddToDoFields
+                        {/* <AddToDoFields
                             toDoValue={this.state.todo}
                             titleValue={this.state.title}
                             titleOnChange={this.handleTitleInput}
                             toDoOnChange={this.handleTodoInput}
-                        />
-                       <AddButton addHandler={this.createNewToDoItem} />
+                        /> */}
+                       {/* <AddButton addHandler={this.createNewToDoItem} /> */}
+                       <Popover 
+                            toDoValue={this.state.todo}
+                            titleValue={this.state.title}
+                            titleOnChange={this.handleTitleInput}
+                            toDoOnChange={this.handleTodoInput}
+                            addHandler={this.createNewToDoItem}
+                       />
                     </div>
                 </div>
             </div>
