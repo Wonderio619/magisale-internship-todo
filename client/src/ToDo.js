@@ -52,7 +52,7 @@ class ToDo extends Component {
 
     handleTodoInput = e => {
         this.setState({
-         todo: e.target.value
+         todo: e.target.value,
       });
     };
 
@@ -91,13 +91,6 @@ class ToDo extends Component {
                     </div>
 
                     <div>
-                        {/* <AddToDoFields
-                            toDoValue={this.state.todo}
-                            titleValue={this.state.title}
-                            titleOnChange={this.handleTitleInput}
-                            toDoOnChange={this.handleTodoInput}
-                        /> */}
-                       {/* <AddButton addHandler={this.createNewToDoItem} /> */}
                        <Popover 
                             toDoValue={this.state.todo}
                             titleValue={this.state.title}

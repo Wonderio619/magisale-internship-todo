@@ -63,7 +63,6 @@ class SimplePopover extends React.Component {
             horizontal: 'center',
           }}
         >
-        <div className={classes.container}>
           <AddToDoFields
             toDoValue={this.props.toDoValue}
             titleValue={this.props.titleValue}
@@ -71,8 +70,6 @@ class SimplePopover extends React.Component {
             toDoOnChange={this.props.toDoOnChange}
             addHandler={this.props.addHandler}
           />
-          <AddToDoFields/>
-          </div>
         </Popover>
       </div>
     );
