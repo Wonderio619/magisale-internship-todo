@@ -30,7 +30,7 @@ class FilledTextFields extends React.Component {
           onChange={this.props.titleOnChange}
           onKeyPress={(ev) => {
             if (ev.ctrlKey && ev.key === 'Enter') {
-                this.props.addHandler
+                this.props.addHandler()
             }
           }}
           value={this.props.titleValue}
@@ -44,7 +44,7 @@ class FilledTextFields extends React.Component {
           onChange={this.props.toDoOnChange}
           onKeyPress={(ev) => {
             if (ev.ctrlKey && ev.key === 'Enter') {
-              this.props.addHandler
+                this.props.addHandler()
             }
           }}
           value={this.props.toDoValue}

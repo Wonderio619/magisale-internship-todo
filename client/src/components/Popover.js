@@ -66,6 +66,7 @@ class SimplePopover extends React.Component {
             titleValue={this.props.titleValue}
             titleOnChange={this.props.titleOnChange}
             toDoOnChange={this.props.toDoOnChange}
+            addHandler={this.props.addHandler}
           />
           <AddButtonSecondary addHandler={this.props.addHandler} />
         </Popover>

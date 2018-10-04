@@ -4,100 +4,88 @@ import Logo from './assets/logo.png';
 import ToDoItem from './components/ToDoItem';
 import AppBar from './components/AppBar';
 import Popover from './components/Popover';
+import {connect} from 'react-redux';
 
 class ToDo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [
-                {
-					title: 'Cup cleaning',
-                    todo: "Wash and take away the Kurzhiy's cup from WC"
-                },
-                {
-					title: 'Smoking rollton',
-                    todo: 'Do some rollton and cigarettes'
-                },
-				{
-					title: 'Curious dream',
-					todo: 'Build a time machine'
-				}
-            ],
 			title: '',
             todo: '',
         };
     };
+
+    componentDidUpdate() {
+        console.log(this.props.list);
+    }
     
     createNewToDoItem = () => {
         if (this.state.title !== '' & this.state.todo !== '') {
-            this.setState(({ list, title, todo }) => ({
-                list: [
-                    ...list,
-                    {
-                        title,
-                        todo
-                    }
-                ],
-                title: '',
-                todo: ''
-            }));
+            this.props.createTodoItem(this.state.title, this.state.todo);
+            this.setState({ title: '', todo: '' });
         }
     };
 
     handleTitleInput = e => {
-      this.setState({
-        title: e.target.value,
-      });
+        this.setState({
+            title: e.target.value,
+        });
     };
 
     handleTodoInput = e => {
         this.setState({
-         todo: e.target.value,
-      });
-    };
-
-    deleteItem = indexToDelete => {
-        this.setState(({ list }) => ({
-          list: list.filter((toDo, index) => index !== indexToDelete)
-      }));
+            todo: e.target.value,
+        });
     };
 
     editItem = (i, updTitle, updToDo) => {
-        let arr = this.state.list;
+        let arr = this.props.list;
         arr[i].title = updTitle;
         arr[i].todo = updToDo;
-        this.setState ({list: arr});
+        this.setState({ updateList: true });
     };
+
+    deleteItem = indexToDelete => {
+        this.props.deleteTodoItem(indexToDelete);
+    };
+
+    idGenerator() {
+        var S4 = () => {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+    }
 
     eachToDo = (item, i) => {
         return <ToDoItem
-                    key={i}
-                    title={item.title}
-                    todo={item.todo}
-                    deleteItem={this.deleteItem.bind(this, i)}
-                    editItem={this.editItem.bind(this, i)}
-                />
-      };
+            key={this.idGenerator()}
+            title={item.title}
+            todo={item.todo}
+            deleteItem={this.deleteItem.bind(this, i)}
+            editItem={this.editItem.bind(this, i)}
+        />
+    };
 
     render() {
+        const { list } = this.props;
         return (
             <div className="ToDo">
-                <img className="Logo" src={Logo} alt="React logo"/>
+                <img className="Logo" src={Logo} alt="React logo" />
                 <AppBar />
                 <div className="ToDo-Container">
 
                     <div className="ToDo-Content">
-                        {this.state.list.map(this.eachToDo)}
+                        {list.map(this.eachToDo)}
                     </div>
 
                     <div>
-                       <Popover 
+                        <Popover
                             toDoValue={this.state.todo}
                             titleValue={this.state.title}
                             titleOnChange={this.handleTitleInput}
                             toDoOnChange={this.handleTodoInput}
                             addHandler={this.createNewToDoItem}
-                       />
+                        />
                     </div>
                 </div>
             </div>
@@ -105,4 +93,21 @@ class ToDo extends Component {
     }
 }
 
-export default ToDo;
+const mapStateToProps = (state) => {
+    return {
+        list: state.list
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteTodoItem: id => {
+            dispatch({ type: "DELETE_TODO", id: id });
+        },
+        createTodoItem: (title, todo) => {
+            dispatch({ type: "CREATE_TODO", title: title, todo: todo });
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
