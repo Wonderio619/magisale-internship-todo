@@ -5,14 +5,12 @@ import Button from '@material-ui/core/Button';
 import Popover from '@material-ui/core/Popover';
 import AddIcon from '@material-ui/icons/Add';
 import AddToDoFields from './AddToDoFields';
+import AddButtonSecondary from './AddButtonSecondary';
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-  container: {
-    display: 'flex',
-  }
 });
 
 class SimplePopover extends React.Component {
@@ -68,8 +66,8 @@ class SimplePopover extends React.Component {
             titleValue={this.props.titleValue}
             titleOnChange={this.props.titleOnChange}
             toDoOnChange={this.props.toDoOnChange}
-            addHandler={this.props.addHandler}
           />
+          <AddButtonSecondary addHandler={this.props.addHandler} />
         </Popover>
       </div>
     );

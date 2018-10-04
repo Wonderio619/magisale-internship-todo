@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import AddButtonSecondary from './AddButtonSecondary';
 
 const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    paddingTop: '15px',
   },
   textField: {
     margin: 'auto',
     width: '80%',
-    padding: '10px', 
+    padding: '10px 0px 10px 0px', 
   },
 });
 
@@ -52,7 +52,6 @@ class FilledTextFields extends React.Component {
           margin="normal"
           helperText="Press Ctrl+Enter to add new ToDo"
         />
-        <AddButtonSecondary addHandler={this.props.addHandler} />
       </form>
     );
   }

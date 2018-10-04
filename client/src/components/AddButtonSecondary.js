@@ -6,7 +6,8 @@ import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
+    marginLeft: '38%',
+    marginBottom: '8px'
   },
   rightIcon: {
     marginLeft: theme.spacing.unit,
