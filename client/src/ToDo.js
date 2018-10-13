@@ -15,9 +15,9 @@ class ToDo extends Component {
         };
     };
 
-    componentDidUpdate() {
-        console.log(this.props.list);
-    }
+    // componentDidUpdate() {
+    //     console.log(this.props.list);
+    // }
     
     createNewToDoItem = () => {
         if (this.state.title !== '' & this.state.todo !== '') {
