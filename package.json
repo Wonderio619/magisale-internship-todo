@@ -9,16 +9,23 @@
   "license": "MIT",
   "scripts": {
     "client": "cd client && npm run start",
-    "server": "nodemon server.js",
+    "server": "nodemon server_hooked.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "dev:server": "cd client && yarn build && cd .. && yarn start",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "@babel/core": "^7.1.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.2",
+    "morgan": "^1.9.1",
+    "source-map-support": "^0.5.9"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
     "concurrently": "^4.0.1"
   },
   "repository": {

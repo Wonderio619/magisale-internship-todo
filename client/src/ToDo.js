@@ -1,29 +1,60 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './ToDo.css';
 import Logo from './assets/logo.png';
 import ToDoItem from './components/ToDoItem';
 import AppBar from './components/AppBar';
 import Popover from './components/Popover';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class ToDo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-			title: '',
+            title: '',
             todo: '',
         };
     };
 
-    componentDidUpdate() {
-        console.log(this.props.list);
-    }
-    
+    componentDidMount = () => {
+        fetch("/api/todos")
+            .then(data => data.json())
+            .then(list => this.setState({ list }));
+    };
+
+
     createNewToDoItem = () => {
-        if (this.state.title !== '' & this.state.todo !== '') {
-            this.props.createTodoItem(this.state.title, this.state.todo);
-            this.setState({ title: '', todo: '' });
-        }
+        fetch("/api/todos", {
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json"
+            }),
+            body: JSON.stringify({
+                title: this.state.title,
+                body: this.state.todo
+            })
+        })
+            .then(resp => {
+                if (!resp.ok) {
+                    if (resp.status >= 400 && resp.status < 500) {
+                        return resp.json().then(data => {
+                            let error = { errorMessage: data.message };
+                            throw error;
+                        });
+                    } else {
+                        let error = {
+                            errorMessage: "Please try again later. Server is not online"
+                        };
+                        throw error;
+                    }
+                }
+                return resp.json();
+            })
+            .then(newTodo => {
+                if (this.state.title !== '' & this.state.todo !== '') {
+                    this.props.createTodoItem(this.state.title, this.state.todo);
+                    this.setState({ title: '', todo: '' });
+                }
+            });
     };
 
     handleTitleInput = e => {
@@ -39,14 +70,65 @@ class ToDo extends Component {
     };
 
     editItem = (i, updTitle, updToDo) => {
-        let arr = this.props.list;
-        arr[i].title = updTitle;
-        arr[i].todo = updToDo;
-        this.setState({ updateList: true });
+        const modifyURL = "/api/todos/" + i;
+        fetch(modifyURL, {
+            method: "put",
+            headers: new Headers({
+                "Content-Type": "application/json"
+            }),
+            body: JSON.stringify({
+                title: updTitle,
+                todo: updToDo
+            })
+        })
+            .then(resp => {
+                if (!resp.ok) {
+                    if (resp.status >= 400 && resp.status < 500) {
+                        return resp.json().then(data => {
+                            let error = { errorMessage: data.message };
+                            throw error;
+                        });
+                    } else {
+                        let error = {
+                            errorMessage: "Please try again later. Server is not online"
+                        };
+                        throw error;
+                    }
+                }
+                return resp.json();
+            })
+            .then(newTodo => {
+                let arr = this.props.list;
+                arr[i].title = updTitle;
+                arr[i].todo = updToDo;
+                this.setState({ updateList: true });
+            });
     };
 
     deleteItem = indexToDelete => {
-        this.props.deleteTodoItem(indexToDelete);
+        const deleteURL = "/api/todos/" + indexToDelete;
+        fetch(deleteURL, {
+            method: "delete"
+        })
+            .then(resp => {
+                if (!resp.ok) {
+                    if (resp.status >= 400 && resp.status < 500) {
+                        return resp.json().then(data => {
+                            let error = { errorMessage: data.message };
+                            throw error;
+                        });
+                    } else {
+                        let error = {
+                            errorMessage: "Please try again later. Server is not online"
+                        };
+                        throw error;
+                    }
+                }
+                return resp.json();
+            })
+            .then(() => {
+                this.props.deleteTodoItem(indexToDelete);
+            });
     };
 
     idGenerator() {
