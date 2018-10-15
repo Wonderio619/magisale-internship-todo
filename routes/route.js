@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bodyParser = require('body-parser');
 let db = require('../models')
 
 // get all todo list with id

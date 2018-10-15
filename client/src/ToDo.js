@@ -10,6 +10,7 @@ class ToDo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            list: [],
             title: '',
             todo: '',
         };
@@ -18,7 +19,8 @@ class ToDo extends Component {
     componentDidMount = () => {
         fetch("/api/todos")
             .then(data => data.json())
-            .then(list => this.setState({ list }));
+            .then(res => this.setState({ list: res.data }));
+            console.log(this.state.list)
     };
 
 
