@@ -19,7 +19,11 @@ class ToDo extends Component {
     componentDidMount = () => {
         fetch("/api/todos")
             .then(data => data.json())
+<<<<<<< HEAD
             .then(res => this.setState({ list: res.data }));
+=======
+            .then(list => this.setState({ list }));
+>>>>>>> 38aa01a10c4413dd4103b9d202e69bdd9c569d8b
             console.log(this.state.list)
     };
 
