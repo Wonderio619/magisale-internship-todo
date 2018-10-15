@@ -133,16 +133,13 @@ class ToDo extends Component {
             });
     };
 
-    idGenerator() {
-        var S4 = () => {
-            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-        };
-        return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
-    }
+    randId() {
+        return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
+   }
 
     eachToDo = (item, i) => {
         return <ToDoItem
-            key={this.idGenerator()}
+            key={this.randId()}
             title={item.title}
             todo={item.todo}
             deleteItem={this.deleteItem.bind(this, i)}
