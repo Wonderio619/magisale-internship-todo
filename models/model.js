@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var todoSchema = new Schema({
-  titleText: String,
-  todoText: String
+  title: String,
+  todo: String
 });
 
 module.exports = mongoose.model('Todo', todoSchema);

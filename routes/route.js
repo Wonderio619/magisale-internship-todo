@@ -12,8 +12,8 @@ router.get('/', function (req, res) {
 // send todo to database
 router.post('/', function (req, res) {
   let todo = new Todo();
-  todo.titleText = req.body.title;
-  todo.todoText = req.body.body;
+  todo.title = req.body.title;
+  todo.todo = req.body.todo;
 
   todo.save(function (err) {
     if (err)
@@ -31,14 +31,22 @@ router.get('/:todoId', function (req, res) {
 
 // updates todo with id
 router.put('/:todoId', function (req, res) {
-  Todo.findOneAndUpdate({ _id: req.params.todoId }, req.body, { new: true })
-    .then((todo) => res.json(todo))
+  const data = {
+    title: req.body.title,
+    todo: req.body.todo
+  }
+
+  Todo.findOneAndUpdate(
+    { id: req.params.todoId }, // the query
+    { $set: data }, // things to update
+    { upsert: true } // upsert option
+    ).then((todo) => res.json(todo))
     .catch((error) => res.send(error))
 })
-
+  
 // deletes todo with id
 router.delete('/:todoId', function (req, res) {
-  Todo.remove({ _id: req.params.todoId })
+  Todo.remove({ id: req.params.todoId })
     .then(() => res.json({ message: 'todo is deleted' }))
     .catch((error) => res.send(error))
 })

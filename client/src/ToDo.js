@@ -19,27 +19,27 @@ class ToDo extends Component {
   componentDidMount = () => {
     fetch("/api/todos")
       .then(data => data.json())
-      .then(res => this.setState({ list: res.data }));
-    console.log(this.state.list)
+      .then(jsonData => {
+        this.setState({ list: jsonData })
+        this.props.getList(this.state.list);
+      });
   };
 
-
   createNewToDoItem = () => {
-    fetch("/api/todos", {
-      method: "post",
-      headers: new Headers({
-        "Content-Type": "application/json"
-      }),
-      body: JSON.stringify({
-        title: this.state.title,
-        body: this.state.todo
-      })
-    })
-      .catch(err => {
-        console.error(err);
-      });
-
     if (this.state.title !== '' & this.state.todo !== '') {
+      fetch("/api/todos", {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify({
+          title: this.state.title,
+          todo: this.state.todo
+        })
+      })
+        .catch(err => {
+          console.error(err);
+        });
       this.props.createTodoItem(this.state.title, this.state.todo);
       this.setState({ title: '', todo: '' });
     }
@@ -171,8 +171,13 @@ const mapDispatchToProps = dispatch => {
     deleteTodoItem: id => {
       dispatch({ type: "DELETE_TODO", id: id });
     },
+
     createTodoItem: (title, todo) => {
       dispatch({ type: "CREATE_TODO", title: title, todo: todo });
+    },
+
+    getList: (list) => {
+      dispatch({ type: "FETCH_TODOS_SUCCESS", list: list });
     }
   };
 };

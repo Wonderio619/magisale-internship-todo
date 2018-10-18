@@ -1,23 +1,17 @@
 const initState = {
-    list: [
-        {
-            title: 'Cup cleaning',
-            todo: "Wash and take away the Kurzhiy's cup from WC"
-        },
-        {
-            title: 'Smoking rollton',
-            todo: 'Do some rollton and cigarettes'
-        },
-        {
-            title: 'Curious dream',
-            todo: 'Build a time machine'
-        }
-    ],
+    list: [],
 };
 
 const rootReducer = (state = initState, action) => {
 
     switch (action.type) {
+
+        case "FETCH_TODOS_SUCCESS":
+            let listFromDB = action.list;
+            return {
+                ...state,
+                list: listFromDB
+            }
 
         case "DELETE_TODO":
             let newList = state.list.filter((todo, index) => action.id !== index)
